@@ -21,6 +21,7 @@ class LoginState extends State<Login> {
   String _password = '';
   String _email = '';
   bool _obscureText = true;
+  bool filled = false;
   var device_id = '';
 
   // ignore: non_constant_identifier_names
@@ -132,53 +133,79 @@ class LoginState extends State<Login> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
+                onChanged: (value) {
+                  if (_emailController.text != '' && _pwController.text != '') {
+                    setState(() {
+                      filled = true;
+                    });
+                  } else {
+                    setState(() {
+                      filled = false;
+                    });
+                  }
+                },
                 cursorColor: Colors.blueAccent,
                 controller: _emailController,
                 decoration: InputDecoration(
-                    errorText: isValidEmail() && email_verify
-                        ? null
-                        : "Invalid Email Address",
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(
-                          color: Colors.grey.shade300,
-                        )),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(
-                          color: Colors.grey.shade300,
-                        )),
-                    contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                    hintText: 'What is your email',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.0))),
+                  errorText: isValidEmail() && email_verify
+                      ? null
+                      : "Invalid Email Address",
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(
+                        color: Colors.grey.shade300,
+                      )),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(
+                        color: Colors.grey.shade300,
+                      )),
+                  contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                  hintText: 'What is your email',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
               ),
             ),
             SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
+                onChanged: (value) {
+                  if (_emailController.text != '' && _pwController.text != '') {
+                    setState(() {
+                      filled = true;
+                    });
+                  } else {
+                    setState(() {
+                      filled = false;
+                    });
+                  }
+                },
                 cursorColor: Colors.blueAccent,
                 obscureText: _obscureText,
                 controller: _pwController,
                 decoration: InputDecoration(
-                    errorText: isValidPassword() && password_verify
-                        ? null
-                        : "Password is too short",
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(
-                          color: Colors.grey.shade300,
-                        )),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(
-                          color: Colors.grey.shade300,
-                        )),
-                    contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                    hintText: 'What is your password',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.0))),
+                  errorText: isValidPassword() && password_verify
+                      ? null
+                      : "Password is too short",
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(
+                        color: Colors.grey.shade300,
+                      )),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(
+                        color: Colors.grey.shade300,
+                      )),
+                  contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                  hintText: 'What is your password',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
               ),
             ),
             SizedBox(height: 60),
@@ -198,7 +225,9 @@ class LoginState extends State<Login> {
                           _emailController.text, _pwController.text, context); */
                     },
                     textColor: Colors.white,
-                    color: Colors.blueAccent,
+                    color: filled == true
+                        ? Colors.blueAccent
+                        : Colors.blueAccent[100],
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0)),
                     child: Text(

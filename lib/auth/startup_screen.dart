@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:wave/auth/login.dart';
 
 class StartUpScreen extends StatefulWidget {
   const StartUpScreen({Key? key}) : super(key: key);
@@ -195,12 +196,12 @@ class _StartUpScreenState extends State<StartUpScreen> {
                     ),
                   ),
                   onPressed: () {
-                    /* Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Login(),
-                          ),
-                        ); */
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Login(),
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     side: BorderSide(

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wave/auth/login.dart';
+import 'package:wave/auth/sign_up.dart';
 
 class StartUpScreen extends StatefulWidget {
   const StartUpScreen({Key? key}) : super(key: key);
@@ -172,7 +173,14 @@ class _StartUpScreenState extends State<StartUpScreen> {
                             ),
                           ),
                         )),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SignUp(),
+                        ),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12), // <-- Radius

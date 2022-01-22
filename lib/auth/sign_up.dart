@@ -2,26 +2,27 @@
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:wave/auth/sign_up.dart';
-import 'package:wave/core/saving.dart';
+import 'package:wave/auth/login.dart';
+import 'package:wave/core/categories.dart';
 
-class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+class SignUp extends StatefulWidget {
+  const SignUp({Key? key}) : super(key: key);
 
   @override
-  State createState() => LoginState();
+  State createState() => SignUpState();
 }
 
-class LoginState extends State<Login> {
+class SignUpState extends State<SignUp> {
   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _name = TextEditingController();
+  final TextEditingController _dateOfBirth = TextEditingController();
+
   final TextEditingController _pwController = TextEditingController();
   // ignore: unused_field
 
   var showDialogBox = false;
   // Initially password is obscure
 
-  String _password = '';
-  String _email = '';
   bool _obscureText = true;
   bool filled = false;
   var device_id = '';
@@ -36,21 +37,19 @@ class LoginState extends State<Login> {
     super.initState();
   }
 
-  bool isValidEmail() {
-    if ((_email == null) || (_email.isEmpty)) {
-      return true;
+  toggle() {
+    if (_name.text != '' &&
+        _emailController.text != '' &&
+        _dateOfBirth.text != '' &&
+        _pwController.text != '') {
+      setState(() {
+        filled = true;
+      });
+    } else {
+      setState(() {
+        filled = false;
+      });
     }
-    return RegExp(
-            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-        .hasMatch(_email);
-  }
-
-  bool isValidPassword() {
-    if ((_password == null) || (_password.isEmpty)) {
-      return true;
-    }
-    // ignore: null_aware_before_operator
-    return (_password.length > 2);
   }
 
   @override
@@ -73,7 +72,7 @@ class LoginState extends State<Login> {
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: Text(
-                'Login',
+                'Create account',
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 30,
@@ -87,7 +86,7 @@ class LoginState extends State<Login> {
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: Text(
-                'Log into your Wave account to start listening to your favorite podcasts or shows.',
+                'Create an account to start listening to your favorite podcasts or shows on Wave.',
                 style: TextStyle(
                   color: Colors.grey.shade600,
                 ),
@@ -97,22 +96,39 @@ class LoginState extends State<Login> {
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 onChanged: (value) {
-                  if (_emailController.text != '' && _pwController.text != '') {
-                    setState(() {
-                      filled = true;
-                    });
-                  } else {
-                    setState(() {
-                      filled = false;
-                    });
-                  }
+                  toggle();
+                },
+                cursorColor: Colors.blueAccent,
+                controller: _name,
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(
+                        color: Colors.grey.shade300,
+                      )),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(
+                        color: Colors.grey.shade300,
+                      )),
+                  contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                  hintText: 'What is your name',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                onChanged: (value) {
+                  toggle();
                 },
                 cursorColor: Colors.blueAccent,
                 controller: _emailController,
                 decoration: InputDecoration(
-                  errorText: isValidEmail() && email_verify
-                      ? null
-                      : "Invalid Email Address",
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                       borderSide: BorderSide(
@@ -134,25 +150,13 @@ class LoginState extends State<Login> {
             SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: TextField(
+              child: TextFormField(
                 onChanged: (value) {
-                  if (_emailController.text != '' && _pwController.text != '') {
-                    setState(() {
-                      filled = true;
-                    });
-                  } else {
-                    setState(() {
-                      filled = false;
-                    });
-                  }
+                  toggle();
                 },
                 cursorColor: Colors.blueAccent,
-                obscureText: _obscureText,
-                controller: _pwController,
+                controller: _dateOfBirth,
                 decoration: InputDecoration(
-                  errorText: isValidPassword() && password_verify
-                      ? null
-                      : "Password is too short",
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                       borderSide: BorderSide(
@@ -164,10 +168,49 @@ class LoginState extends State<Login> {
                         color: Colors.grey.shade300,
                       )),
                   contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                  hintText: 'What is your password',
+                  hintText: 'What is your date of birth',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
+                ),
+              ),
+            ),
+            SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                onChanged: (value) {
+                  toggle();
+                },
+                cursorColor: Colors.blueAccent,
+                obscureText: _obscureText,
+                controller: _pwController,
+                decoration: InputDecoration(
+                  suffix: Text('Show'),
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(
+                        color: Colors.grey.shade300,
+                      )),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(
+                        color: Colors.grey.shade300,
+                      )),
+                  contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                  hintText: 'Choose your password',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 12.0),
+              child: Text(
+                'Passwords must contain at least 8 characters.',
+                style: TextStyle(
+                  color: Colors.grey.shade600,
                 ),
               ),
             ),
@@ -186,12 +229,10 @@ class LoginState extends State<Login> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const Saving(),
+                            builder: (context) => Categories(),
                           ),
                         );
                       }
-                      /*   hitService(
-                          _emailController.text, _pwController.text, context); */
                     },
                     textColor: Colors.white,
                     color: filled == true
@@ -200,7 +241,7 @@ class LoginState extends State<Login> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0)),
                     child: Text(
-                      'Login',
+                      'Sign up with Email',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -218,7 +259,7 @@ class LoginState extends State<Login> {
                   TextSpan(
                     children: [
                       TextSpan(
-                        text: "New to wave ? ",
+                        text: "Already have an account ? ",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.blueAccent,
@@ -230,11 +271,11 @@ class LoginState extends State<Login> {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => SignUp(),
+                                builder: (context) => Login(),
                               ),
                             );
                           },
-                        text: 'Sign up',
+                        text: 'Login',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.blueAccent,

@@ -71,14 +71,7 @@ class _SearchState extends State<Search> {
                       child: InkWell(
                         splashColor: Colors.transparent,
                         highlightColor: Colors.transparent,
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Search(),
-                            ),
-                          );
-                        },
+                        onTap: () {},
                         child: Icon(
                           Icons.search,
                           size: 40,

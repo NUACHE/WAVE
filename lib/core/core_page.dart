@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:wave/core/search.dart';
 
 import 'home.dart';
 
@@ -43,7 +42,7 @@ class _CorePageState extends State<CorePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
+      /* appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         automaticallyImplyLeading: false,
@@ -93,7 +92,7 @@ class _CorePageState extends State<CorePage> {
             ),
           ),
         ],
-      ),
+      ), */
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
@@ -112,7 +111,7 @@ class _CorePageState extends State<CorePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.notifications_outlined),
-            label: 'Orders',
+            label: 'Notifications',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings_outlined),

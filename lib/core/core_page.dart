@@ -1,6 +1,8 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, unused_field
 
 import 'package:flutter/material.dart';
+import 'package:wave/core/discover.dart';
+import 'package:wave/core/notifications.dart';
 import 'package:wave/core/settings.dart';
 
 import 'home.dart';
@@ -19,14 +21,8 @@ class _CorePageState extends State<CorePage> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     const Home(),
-    const Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
-    const Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
+    const Discover(),
+    const Notifications(),
     const Settings()
   ];
 

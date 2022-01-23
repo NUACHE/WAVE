@@ -1,0 +1,8 @@
+<svg id="Rewind_button" data-name="Rewind button" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+  <g id="Group_72" data-name="Group 72" transform="translate(22.742) rotate(42)">
+    <rect id="Rectangle_6762" data-name="Rectangle 6762" width="33.988" height="33.988" fill="none"/>
+    <path id="Path_20" data-name="Path 20" d="M6.373,6.373H0V0" transform="translate(4.226 6.866)" fill="none" stroke="#3b83f3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="Path_21" data-name="Path 21" d="M4.506,19.945a11.683,11.683,0,1,0,0-16.523L0,7.928" transform="translate(4.226 5.311)" fill="none" stroke="#3b83f3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+  </g>
+  <text id="_10" data-name="10" transform="translate(24.082 27.084)" fill="#3b83f3" font-size="8" font-family="GillSans-SemiBold, Gill Sans" font-weight="600"><tspan x="-4" y="0">10</tspan></text>
+</svg>

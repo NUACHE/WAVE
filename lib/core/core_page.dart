@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:wave/core/settings.dart';
 
 import 'home.dart';
 
@@ -26,10 +27,7 @@ class _CorePageState extends State<CorePage> {
       'Index 2: School',
       style: optionStyle,
     ),
-    const Text(
-      'Index 3: Settings',
-      style: optionStyle,
-    ),
+    const Settings()
   ];
 
   void _onItemTapped(int index) {
@@ -42,57 +40,6 @@ class _CorePageState extends State<CorePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      /* appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        leadingWidth: 200,
-        leading: const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Text(
-            'Just for you',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 19,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 8.0, bottom: 10),
-            child: Container(
-              height: 30,
-              width: 30,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.black,
-              ),
-              child: Center(
-                child: Padding(
-                  padding: EdgeInsets.all(4.0),
-                  child: InkWell(
-                    splashColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Search(),
-                        ),
-                      );
-                    },
-                    child: Icon(
-                      Icons.search,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ), */
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),

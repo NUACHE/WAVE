@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wave/core/widgets/home/details.dart';
 
 class CategoryRow extends StatelessWidget {
   final String title;
@@ -42,37 +43,50 @@ class CategoryRow extends StatelessWidget {
                 for (var a = 0; a < images.length; a++)
                   Padding(
                     padding: const EdgeInsets.only(right: 10.0),
-                    child: Stack(
-                      children: [
-                        Container(
-                          height: MediaQuery.of(context).size.width / 2.5,
-                          width: MediaQuery.of(context).size.width / 2.5,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            image: DecorationImage(
-                              image: AssetImage(images[a]),
+                    child: InkWell(
+                      onTap: () {
+                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Details(
+                              image: '${images[a]}',
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.width / 2.5,
-                          width: MediaQuery.of(context).size.width / 2.5,
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.only(right: 15.0, bottom: 10),
-                            child: Container(
-                              alignment: Alignment.bottomRight,
-                              child: audio == true
-                                  ? const Icon(
-                                      Icons.play_circle_fill,
-                                      color: Colors.white,
-                                      size: 28,
-                                    )
-                                  : Container(),
+                        );
+                      },
+                      child: Stack(
+                        children: [
+                          Container(
+                            height: MediaQuery.of(context).size.width / 2.5,
+                            width: MediaQuery.of(context).size.width / 2.5,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              image: DecorationImage(
+                                image: AssetImage(images[a]),
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                          SizedBox(
+                            height: MediaQuery.of(context).size.width / 2.5,
+                            width: MediaQuery.of(context).size.width / 2.5,
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  right: 15.0, bottom: 10),
+                              child: Container(
+                                alignment: Alignment.bottomRight,
+                                child: audio == true
+                                    ? const Icon(
+                                        Icons.play_circle_fill,
+                                        color: Colors.white,
+                                        size: 28,
+                                      )
+                                    : Container(),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
               ],

@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:wave/core/search.dart';
 import 'package:wave/core/widgets/category_row.dart';
+import 'package:wave/core/widgets/home/script.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -316,56 +318,64 @@ class _HomeState extends State<Home> {
       padding: EdgeInsets.only(top: 4, bottom: 4, left: 8),
       duration: Duration(days: 365),
       backgroundColor: Colors.white,
-      content: Row(
-        children: [
-          Container(
-            height: 40,
-            width: 40,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              image: DecorationImage(
-                image: AssetImage(image),
+      content: InkWell(
+        onTap: () {
+          podCastModal(
+            context,
+            image: image,
+          );
+        },
+        child: Row(
+          children: [
+            Container(
+              height: 40,
+              width: 40,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                image: DecorationImage(
+                  image: AssetImage(image),
+                ),
               ),
             ),
-          ),
-          SizedBox(
-            height: 40,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    title,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
+            SizedBox(
+              height: 40,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      title,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  Text(
-                    detail,
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w300,
+                    Text(
+                      detail,
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontWeight: FontWeight.w300,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-          Spacer(),
-          IconButton(
-            onPressed: () {
-              setState(() {
-                paused = !paused;
-              });
-            },
-            icon: Icon(
-              paused == false ? Icons.pause : Icons.play_arrow,
+            Spacer(),
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  paused = !paused;
+                });
+              },
+              icon: Icon(
+                paused == false ? Icons.pause : Icons.play_arrow,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
 
@@ -373,4 +383,180 @@ class _HomeState extends State<Home> {
   }
 
   bool paused = false;
+
+  void podCastModal(BuildContext context, {image}) async {
+    showModalBottomSheet(
+        isScrollControlled: true,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(20),
+          ),
+        ),
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        context: context,
+        builder: (BuildContext bc) {
+          return Card(
+            elevation: 10,
+            margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+            child: Container(
+                padding: EdgeInsets.all(10),
+                width: double.infinity,
+                color: Colors.white,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Container(height: 20),
+                    Container(
+                      height: MediaQuery.of(context).size.width / 1.1,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        image: DecorationImage(
+                          image: AssetImage(image),
+                        ),
+                      ),
+                    ),
+                    Container(height: 10),
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                "2021 Recap",
+                                style: TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Container(height: 5),
+                              Text(
+                                "The Week in Review with Bill Radke.",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w300,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                    SliderTheme(
+                      data: SliderTheme.of(context).copyWith(
+                        thumbColor: Colors.transparent,
+                        trackShape: RectangularSliderTrackShape(),
+                        thumbShape:
+                            RoundSliderThumbShape(enabledThumbRadius: 0.0),
+                      ),
+                      child: Slider(
+                        activeColor: Colors.blueAccent,
+                        inactiveColor: Colors.grey.shade200,
+                        value: 30,
+                        min: 0,
+                        max: 100,
+                        onChanged: (double value) {},
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(
+                          '1.0x',
+                          style: TextStyle(
+                            color: Colors.blueAccent,
+                          ),
+                        ),
+                        SvgPicture.asset(
+                          'assets/svgs/rewindButton.svg',
+                          height: 40,
+                          width: 40,
+                        ),
+                        Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.blueAccent,
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Icon(
+                                Icons.pause,
+                                color: Colors.white,
+                              ),
+                            )),
+                        SvgPicture.asset(
+                          'assets/svgs/forwardButton.svg',
+                          height: 40,
+                          width: 40,
+                        ),
+                        Icon(
+                          Icons.favorite_outline,
+                          color: Colors.blueAccent,
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    SizedBox(
+                      height: 55,
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: ButtonTheme(
+                            minWidth: 50.0,
+                            height: 50.0,
+                            // ignore: deprecated_member_use
+                            child: OutlineButton(
+                              onPressed: () async {
+                                ScaffoldMessenger.of(context)
+                                    .hideCurrentSnackBar();
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ScriptPage(
+                                      image: image,
+                                    ),
+                                  ),
+                                );
+                              },
+                              textColor: Colors.blueAccent,
+                              color: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              borderSide: BorderSide(
+                                color: Colors.blueAccent,
+                              ),
+                              child: SizedBox(
+                                width: 100,
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.checklist),
+                                    Text(
+                                      'View Script',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w200,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 60,
+                    ),
+                  ],
+                )),
+          );
+        });
+  }
 }

@@ -1,0 +1,8 @@
+<svg id="Forward_button" data-name="Forward button" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+  <g id="Group_73" data-name="Group 73" transform="translate(48 25.258) rotate(138)">
+    <rect id="Rectangle_6762" data-name="Rectangle 6762" width="33.988" height="33.988" transform="translate(0 0)" fill="none"/>
+    <path id="Path_20" data-name="Path 20" d="M6.373,0H0V6.373" transform="translate(4.226 20.749)" fill="none" stroke="#3b83f3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="Path_21" data-name="Path 21" d="M4.506,3.422a11.683,11.683,0,1,1,0,16.523L0,15.438" transform="translate(4.226 5.311)" fill="none" stroke="#3b83f3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+  </g>
+  <text id="_10" data-name="10" transform="translate(24.081 27.084)" fill="#3b83f3" font-size="8" font-family="GillSans-SemiBold, Gill Sans" font-weight="600"><tspan x="-4" y="0">10</tspan></text>
+</svg>

@@ -12,6 +12,7 @@ class Details extends StatefulWidget {
 
 class _DetailsState extends State<Details> {
   bool subscribed = false;
+  bool download = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -233,15 +234,28 @@ class _DetailsState extends State<Details> {
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Row(
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: Colors.black,
-                        )),
-                    child: Icon(
-                      Icons.arrow_downward,
-                      size: 18,
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        download = !download;
+                      });
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: download == true
+                              ? Colors.blueAccent
+                              : Colors.transparent,
+                          border: Border.all(
+                            color: download == true
+                                ? Colors.blueAccent
+                                : Colors.black,
+                          )),
+                      child: Icon(
+                        Icons.arrow_downward,
+                        size: 18,
+                        color: download == true ? Colors.white : Colors.black,
+                      ),
                     ),
                   ),
                   SizedBox(

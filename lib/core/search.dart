@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:wave/core/voice_trigger.dart';
 
 class Search extends StatefulWidget {
   const Search({Key? key}) : super(key: key);
@@ -22,31 +23,41 @@ class _SearchState extends State<Search> {
             color: Colors.black,
           ),
           leadingWidth: 30,
-          title: TextFormField(
-            onChanged: (value) {},
-            cursorColor: Colors.blueAccent,
-            decoration: InputDecoration(
-              prefixIcon: Icon(Icons.search_outlined),
-              suffixIcon: IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.mic_none_outlined,
-                    color: Colors.black,
-                  )),
-              enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(
-                    color: Colors.grey.shade300,
-                  )),
-              focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(
-                    color: Colors.grey.shade300,
-                  )),
-              contentPadding: EdgeInsets.fromLTRB(0.0, 0.0, 00.0, 0.0),
-              hintText: 'Search',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.0),
+          title: ConstrainedBox(
+            constraints: const BoxConstraints.tightFor(height: 40),
+            child: TextFormField(
+              onChanged: (value) {},
+              cursorColor: Colors.blueAccent,
+              decoration: InputDecoration(
+                prefixIcon: Icon(Icons.search_outlined),
+                suffixIcon: IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const VoiceTrigger(),
+                        ),
+                      );
+                    },
+                    icon: Icon(
+                      Icons.mic_none_outlined,
+                      color: Colors.black,
+                    )),
+                enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(
+                      color: Colors.grey.shade300,
+                    )),
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(
+                      color: Colors.grey.shade300,
+                    )),
+                contentPadding: EdgeInsets.fromLTRB(0.0, 0.0, 00.0, 0.0),
+                hintText: 'Search',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
               ),
             ),
           ),

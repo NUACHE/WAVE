@@ -399,163 +399,164 @@ class _HomeState extends State<Home> {
             elevation: 10,
             margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
             child: Container(
-                padding: EdgeInsets.all(10),
-                width: double.infinity,
-                color: Colors.white,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Container(height: 20),
-                    Container(
-                      height: MediaQuery.of(context).size.width / 1.1,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        image: DecorationImage(
-                          image: AssetImage(image),
-                        ),
+              padding: EdgeInsets.all(10),
+              width: double.infinity,
+              color: Colors.white,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(height: 20),
+                  Container(
+                    height: MediaQuery.of(context).size.width / 1.1,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      image: DecorationImage(
+                        image: AssetImage(image),
                       ),
                     ),
-                    Container(height: 10),
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              Text(
-                                "2021 Recap",
-                                style: TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                  ),
+                  Container(height: 10),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              "2021 Recap",
+                              style: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
                               ),
-                              Container(height: 5),
-                              Text(
-                                "The Week in Review with Bill Radke.",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w300,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                    SliderTheme(
-                      data: SliderTheme.of(context).copyWith(
-                        thumbColor: Colors.transparent,
-                        trackShape: RectangularSliderTrackShape(),
-                        thumbShape:
-                            RoundSliderThumbShape(enabledThumbRadius: 0.0),
-                      ),
-                      child: Slider(
-                        activeColor: Colors.blueAccent,
-                        inactiveColor: Colors.grey.shade200,
-                        value: 30,
-                        min: 0,
-                        max: 100,
-                        onChanged: (double value) {},
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text(
-                          '1.0x',
-                          style: TextStyle(
-                            color: Colors.blueAccent,
-                          ),
-                        ),
-                        SvgPicture.asset(
-                          'assets/svgs/rewindButton.svg',
-                          height: 40,
-                          width: 40,
-                        ),
-                        Container(
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.blueAccent,
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(15.0),
-                              child: Icon(
-                                Icons.pause,
-                                color: Colors.white,
+                            Container(height: 5),
+                            Text(
+                              "The Week in Review with Bill Radke.",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w300,
+                                color: Colors.grey,
                               ),
-                            )),
-                        SvgPicture.asset(
-                          'assets/svgs/forwardButton.svg',
-                          height: 40,
-                          width: 40,
+                            ),
+                          ],
                         ),
-                        Icon(
-                          Icons.favorite_outline,
+                      )
+                    ],
+                  ),
+                  SliderTheme(
+                    data: SliderTheme.of(context).copyWith(
+                      thumbColor: Colors.transparent,
+                      trackShape: RectangularSliderTrackShape(),
+                      thumbShape:
+                          RoundSliderThumbShape(enabledThumbRadius: 0.0),
+                    ),
+                    child: Slider(
+                      activeColor: Colors.blueAccent,
+                      inactiveColor: Colors.grey.shade200,
+                      value: 30,
+                      min: 0,
+                      max: 100,
+                      onChanged: (double value) {},
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                        '1.0x',
+                        style: TextStyle(
                           color: Colors.blueAccent,
                         ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    SizedBox(
-                      height: 55,
-                      child: Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8),
-                          child: ButtonTheme(
-                            minWidth: 50.0,
-                            height: 50.0,
-                            // ignore: deprecated_member_use
-                            child: OutlineButton(
-                              onPressed: () async {
-                                ScaffoldMessenger.of(context)
-                                    .hideCurrentSnackBar();
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ScriptPage(
-                                      image: image,
-                                    ),
-                                  ),
-                                );
-                              },
-                              textColor: Colors.blueAccent,
+                      ),
+                      SvgPicture.asset(
+                        'assets/svgs/rewindButton.svg',
+                        height: 40,
+                        width: 40,
+                      ),
+                      Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.blueAccent,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Icon(
+                              Icons.pause,
                               color: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              borderSide: BorderSide(
-                                color: Colors.blueAccent,
-                              ),
-                              child: SizedBox(
-                                width: 100,
-                                child: Row(
-                                  children: [
-                                    Icon(Icons.checklist),
-                                    Text(
-                                      'View Script',
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w200,
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ],
+                            ),
+                          )),
+                      SvgPicture.asset(
+                        'assets/svgs/forwardButton.svg',
+                        height: 40,
+                        width: 40,
+                      ),
+                      Icon(
+                        Icons.favorite_outline,
+                        color: Colors.blueAccent,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  SizedBox(
+                    height: 55,
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: ButtonTheme(
+                          minWidth: 50.0,
+                          height: 50.0,
+                          // ignore: deprecated_member_use
+                          child: OutlineButton(
+                            onPressed: () async {
+                              ScaffoldMessenger.of(context)
+                                  .hideCurrentSnackBar();
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ScriptPage(
+                                    image: image,
+                                  ),
                                 ),
+                              );
+                            },
+                            textColor: Colors.blueAccent,
+                            color: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            borderSide: BorderSide(
+                              color: Colors.blueAccent,
+                            ),
+                            child: SizedBox(
+                              width: 100,
+                              child: Row(
+                                children: [
+                                  Icon(Icons.checklist),
+                                  Text(
+                                    'View Script',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w200,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ],
                               ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 60,
-                    ),
-                  ],
-                )),
+                  ),
+                  SizedBox(
+                    height: 60,
+                  ),
+                ],
+              ),
+            ),
           );
         });
   }
